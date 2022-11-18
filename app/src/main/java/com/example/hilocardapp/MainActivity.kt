@@ -8,6 +8,8 @@ import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
 
+    var highScore = 0
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
