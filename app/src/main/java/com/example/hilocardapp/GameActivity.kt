@@ -28,6 +28,7 @@ class GameActivity : AppCompatActivity() {
         //card1.text = playingDeck.drawCard().cardName
 
     }
+    // testing testing
 
 
 
