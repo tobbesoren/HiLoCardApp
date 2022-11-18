@@ -4,7 +4,7 @@ import android.util.Log
 import java.util.*
 
 class Card(private val suite: Enum<Suite>, private val valueName: Enum<ValueName>, ) {
-    private val valueInt = valueName.ordinal + 2
+    val valueInt = valueName.ordinal + 2
     var cardName : String = this.valueName.toString().lowercase()
         .replaceFirstChar {it.titlecase(Locale.getDefault())} + " of\n" +
             this.suite.toString().lowercase()
