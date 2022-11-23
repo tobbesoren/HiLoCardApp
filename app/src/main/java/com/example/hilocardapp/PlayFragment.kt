@@ -5,6 +5,8 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+
 /*
 Used for the play field.
  */
@@ -36,8 +38,40 @@ class PlayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_play, container, false)
+        val gameActivity = activity as GameActivity
+
+        val view = inflater.inflate(R.layout.fragment_play, container, false)
+        val hiButton = view.findViewById<Button>(R.id.higherButton)
+        val loButton = view.findViewById<Button>(R.id.lowerButton)
+
+
+
+        hiButton.setOnClickListener {
+            with(gameActivity) {
+                card2TextView.text = playingDeck.drawCard().cardName
+                card2imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
+                checkCards(
+                    playingDeck.discardedCards[playingDeck.discardedCards.size - 1],
+                    playingDeck.discardedCards[playingDeck.discardedCards.size - 2]
+                )
+
+                replaceWithResultFragment()
+            }
+        }
+
+        loButton.setOnClickListener {
+            with(gameActivity) {
+                card2TextView.text = playingDeck.drawCard().cardName
+                card2imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
+                checkCards(
+                    playingDeck.discardedCards[playingDeck.discardedCards.size - 2],
+                    playingDeck.discardedCards[playingDeck.discardedCards.size - 1]
+                )
+
+                replaceWithResultFragment()
+            }
+        }
+        return view
     }
 
     companion object {
