@@ -2,8 +2,6 @@ package com.example.hilocardapp
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import java.util.*
@@ -20,6 +18,9 @@ class GameActivity : AppCompatActivity() {
     lateinit var message : TextView
     lateinit var card1imageView : ImageView
     lateinit var card2imageView : ImageView
+
+    val mainPlayFragment = PlayFragment()
+    val mainResultFragment = ResultFragment()
 
     var score = 0
     var triesLeft = 10
@@ -39,6 +40,8 @@ class GameActivity : AppCompatActivity() {
 
         card1imageView = findViewById(R.id.card1ImageView)
         card2imageView = findViewById(R.id.card2ImageView)
+
+        val mainPlayFragment = PlayFragment()
 
 //        val hiButton = findViewById<Button>(R.id.higherButton)
 //        val loButton = findViewById<Button>(R.id.lowerButton)
@@ -73,7 +76,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun startGame() {
-        addPlayFragment()
+        replaceWithPlayFragment()
         playingDeck.shuffleDeck()
 
         scoreTextView.text = "Score: $score"
@@ -103,10 +106,16 @@ class GameActivity : AppCompatActivity() {
         return
     }
 
-    private fun addPlayFragment() {
-        val playFragment = PlayFragment()
+    fun replaceWithPlayFragment() {
+
         val transaction = supportFragmentManager.beginTransaction()
-        transaction.add(R.id.container, playFragment, "playFragment")
+        transaction.replace(R.id.container, mainPlayFragment, "playFragment")
+        transaction.commit()
+    }
+
+    fun replaceWithResultFragment() {
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, mainResultFragment, "resultFragment")
         transaction.commit()
     }
 

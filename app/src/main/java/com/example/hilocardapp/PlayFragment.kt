@@ -48,16 +48,15 @@ class PlayFragment : Fragment() {
 
         hiButton.setOnClickListener {
             with(gameActivity) {
-            card2TextView.text = playingDeck.drawCard().cardName
-            card2imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
-            checkCards(
-                playingDeck.discardedCards[playingDeck.discardedCards.size - 1],
-                playingDeck.discardedCards[playingDeck.discardedCards.size - 2]
-            )
+                card2TextView.text = playingDeck.drawCard().cardName
+                card2imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
+                checkCards(
+                    playingDeck.discardedCards[playingDeck.discardedCards.size - 1],
+                    playingDeck.discardedCards[playingDeck.discardedCards.size - 2]
+                )
 
-            delay()
-        }
-
+                replaceWithResultFragment()
+            }
         }
 
         loButton.setOnClickListener {
@@ -69,9 +68,8 @@ class PlayFragment : Fragment() {
                     playingDeck.discardedCards[playingDeck.discardedCards.size - 1]
                 )
 
-                delay()
+                replaceWithResultFragment()
             }
-
         }
         return view
     }
