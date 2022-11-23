@@ -5,6 +5,10 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 
+/*
+Look up shared preferences!
+ */
+
 
 class MainActivity : AppCompatActivity() {
 

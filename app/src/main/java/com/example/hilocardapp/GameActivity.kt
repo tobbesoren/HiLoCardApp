@@ -3,6 +3,7 @@ package com.example.hilocardapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 
 class GameActivity : AppCompatActivity() {
@@ -14,6 +15,8 @@ class GameActivity : AppCompatActivity() {
     private lateinit var scoreTextView : TextView
     private lateinit var triesLeftTextView : TextView
     private lateinit var message : TextView
+    private lateinit var card1image : ImageView
+    private lateinit var card2image : ImageView
 
     var score = 0
     var triesLeft = 10
@@ -30,6 +33,9 @@ class GameActivity : AppCompatActivity() {
         card1 = findViewById(R.id.card1TextView)
         card2 = findViewById(R.id.card2TextView)
 
+        card1image = findViewById(R.id.card1ImageView)
+        card2image = findViewById(R.id.card2ImageView)
+
         val hiButton = findViewById<Button>(R.id.higherButton)
         val loButton = findViewById<Button>(R.id.lowerButton)
 
@@ -41,16 +47,25 @@ class GameActivity : AppCompatActivity() {
         triesLeftTextView.text = triesLeft.toString()
 
         card1.text = playingDeck.drawCard().cardName
+        card2.text = "--"
+
+        card1image.setImageResource(playingDeck.discardedCards[0].pictureID)
 
         hiButton.setOnClickListener {
             card2.text = playingDeck.drawCard().cardName
+            card2image.setImageResource(playingDeck.discardedCards.last().pictureID)
             checkCards(playingDeck.discardedCards[playingDeck.discardedCards.size-1],
                 playingDeck.discardedCards[playingDeck.discardedCards.size-2])
+            // Here, we should change fragment and show result
+
+            card1image.setImageResource(playingDeck.discardedCards.last().pictureID)
+            card2image.setImageResource(R.drawable.card_back)
 
         }
 
         loButton.setOnClickListener {
             card2.text = playingDeck.drawCard().cardName
+            card2image.setImageResource(playingDeck.discardedCards.last().pictureID)
             checkCards(playingDeck.discardedCards[playingDeck.discardedCards.size-2],
                 playingDeck.discardedCards[playingDeck.discardedCards.size-1])
         }
@@ -65,8 +80,8 @@ class GameActivity : AppCompatActivity() {
             message.text = "Wrong!"
             triesLeft--
         }
-        scoreTextView.text = score.toString()
-        triesLeftTextView.text = triesLeft.toString()
+        scoreTextView.text = "Score: $score"
+        triesLeftTextView.text = "Tries left: $triesLeft"
         if(triesLeft == 0) {
             gameOver()
         }

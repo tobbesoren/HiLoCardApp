@@ -1,11 +1,15 @@
 package com.example.hilocardapp
 
+import android.graphics.drawable.Drawable
 import android.util.Log
 import java.util.*
 
-class Card(private val suite: Enum<Suite>, private val valueName: Enum<ValueName>, ) {
+class Card(private val suite: Enum<Suite>,
+           private val valueName: Enum<ValueName>,
+           val pictureID: Int) {
+
     val valueInt = valueName.ordinal + 2
-    var cardName : String = this.valueName.toString().lowercase()
+    val cardName : String = this.valueName.toString().lowercase()
         .replaceFirstChar {it.titlecase(Locale.getDefault())} + " of\n" +
             this.suite.toString().lowercase()
                 .replaceFirstChar {it.titlecase(Locale.getDefault())}
