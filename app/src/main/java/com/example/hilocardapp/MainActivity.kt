@@ -45,8 +45,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun viewHighScore() {
-        val intent = Intent(this, GameActivity::class.java)
-        startActivity(intent)
+
     }
 
     private fun testDeck() {

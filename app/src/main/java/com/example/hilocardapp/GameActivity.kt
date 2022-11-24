@@ -1,7 +1,9 @@
 package com.example.hilocardapp
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
 import java.util.*
@@ -23,9 +25,10 @@ class GameActivity : AppCompatActivity() {
 
     val mainPlayFragment = PlayFragment()
     val mainResultFragment = ResultFragment()
+    val mainGameOverFragment = GameOverFragment()
 
     var score = 0
-    var triesLeft = 10
+    var triesLeft = 1
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -105,6 +108,19 @@ class GameActivity : AppCompatActivity() {
         transaction.commit()
     }
 
+    fun addGameOverFragment() {
+        Log.d("!!!!", "game over")
+        val transaction = supportFragmentManager.beginTransaction()
+        transaction.replace(R.id.container, mainGameOverFragment, "gameOverFragment")
+        transaction.commit()
+    }
+
+    fun returnToMainMenu() {
+        val intent = Intent(this, MainActivity::class.java)
+        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
+        startActivity(intent)
+    }
+
     fun delay() {
         Timer("SettingUp", false).schedule(2500) {
             moveCardImage()
@@ -121,5 +137,6 @@ class GameActivity : AppCompatActivity() {
 
     fun gameOver() {
         message.text = "Game Over"
+        addGameOverFragment()
     }
 }

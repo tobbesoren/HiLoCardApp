@@ -6,11 +6,6 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
-
-/*
-Used for the play field.
- */
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -19,14 +14,13 @@ private const val ARG_PARAM2 = "param2"
 
 /**
  * A simple [Fragment] subclass.
- * Use the [PlayFragment.newInstance] factory method to
+ * Use the [GameOverFragment.newInstance] factory method to
  * create an instance of this fragment.
  */
-class PlayFragment : Fragment() {
+class GameOverFragment : Fragment() {
     // TODO: Rename and change types of parameters
     private var param1: String? = null
     private var param2: String? = null
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,35 +35,22 @@ class PlayFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
+        val view = inflater.inflate(R.layout.fragment_game_over, container, false)
 
-        val view = inflater.inflate(R.layout.fragment_play, container, false)
-
-        val hiButton = view.findViewById<Button>(R.id.higherButton)
-        val loButton = view.findViewById<Button>(R.id.lowerButton)
+        val hiScoresButton = view.findViewById<Button>(R.id.hiScoresButton)
+        val menuButton = view.findViewById<Button>(R.id.menuButton)
 
         val gameActivity = activity as GameActivity
-        val mainDeckTextView = gameActivity.findViewById<TextView>(R.id.deckTextView)
 
-        hiButton.setOnClickListener {
-            nextCard()
 
-            with(gameActivity) {
-                mainDeckTextView.text = "Cards left: ${playingDeck.mainDeck.size}"
-                checkCards(newCard, oldCard)
-                if(gameActivity.triesLeft > 0) {
-                    replaceWithResultFragment()
-                }
-            }
+        hiScoresButton.setOnClickListener {
+            //TO DO
+
         }
 
-        loButton.setOnClickListener {
-            nextCard()
+        menuButton.setOnClickListener {
             with(gameActivity) {
-                mainDeckTextView.text = "Cards left: ${playingDeck.mainDeck.size}"
-                checkCards(oldCard, newCard)
-                if(gameActivity.triesLeft > 0) {
-                    replaceWithResultFragment()
-                }
+                returnToMainMenu()
             }
         }
         return view
@@ -82,26 +63,16 @@ class PlayFragment : Fragment() {
          *
          * @param param1 Parameter 1.
          * @param param2 Parameter 2.
-         * @return A new instance of fragment PlayFragment.
+         * @return A new instance of fragment GameOverFragment.
          */
         // TODO: Rename and change types and number of parameters
         @JvmStatic
         fun newInstance(param1: String, param2: String) =
-            PlayFragment().apply {
+            GameOverFragment().apply {
                 arguments = Bundle().apply {
                     putString(ARG_PARAM1, param1)
                     putString(ARG_PARAM2, param2)
                 }
             }
-    }
-
-
-    fun nextCard() {
-        val gameActivity = activity as GameActivity
-        with(gameActivity) {
-            newCard = playingDeck.drawCard()
-            card2TextView.text = newCard.cardName
-            card2imageView.setImageResource(newCard.pictureID)
-        }
     }
 }
