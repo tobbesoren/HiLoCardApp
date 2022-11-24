@@ -18,6 +18,8 @@ class GameActivity : AppCompatActivity() {
     lateinit var message : TextView
     lateinit var card1imageView : ImageView
     lateinit var card2imageView : ImageView
+    lateinit var oldCard : Card
+    lateinit var newCard : Card
 
     val mainPlayFragment = PlayFragment()
     val mainResultFragment = ResultFragment()
@@ -41,7 +43,6 @@ class GameActivity : AppCompatActivity() {
         card1imageView = findViewById(R.id.card1ImageView)
         card2imageView = findViewById(R.id.card2ImageView)
 
-        val mainPlayFragment = PlayFragment()
 
 //        val hiButton = findViewById<Button>(R.id.higherButton)
 //        val loButton = findViewById<Button>(R.id.lowerButton)
@@ -50,28 +51,10 @@ class GameActivity : AppCompatActivity() {
         playingDeck = StandardDeck()
         playingDeck.initDeck()
 
+
+
         startGame()
 
-
-        /*hiButton.setOnClickListener {
-            card2TextView.text = playingDeck.drawCard().cardName
-            card2imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
-            checkCards(playingDeck.discardedCards[playingDeck.discardedCards.size-1],
-                playingDeck.discardedCards[playingDeck.discardedCards.size-2])
-
-            delay()
-
-        }
-
-        loButton.setOnClickListener {
-            card2TextView.text = playingDeck.drawCard().cardName
-            card2imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
-            checkCards(playingDeck.discardedCards[playingDeck.discardedCards.size-2],
-                playingDeck.discardedCards[playingDeck.discardedCards.size-1])
-
-            delay()
-
-        }*/
 
     }
 
@@ -79,15 +62,18 @@ class GameActivity : AppCompatActivity() {
         replaceWithPlayFragment()
         playingDeck.shuffleDeck()
 
+        oldCard = playingDeck.drawCard()
+
         scoreTextView.text = "Score: $score"
         triesLeftTextView.text = "Tries left: $triesLeft"
 
-        card1TextView.text = playingDeck.drawCard().cardName
+        card1TextView.text = oldCard.cardName
         card2TextView.text = "--"
 
-        //message.text = "Make your guess"
+        message.text = "Make your guess"
 
         card1imageView.setImageResource(playingDeck.discardedCards[0].pictureID)
+        card2imageView.setImageResource(R.drawable.card_back)
     }
 
     fun checkCards(hiCard: Card, loCard: Card)  {
@@ -126,8 +112,10 @@ class GameActivity : AppCompatActivity() {
     }
 
     fun moveCardImage() {
-        card1imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
+        card1imageView.setImageResource(oldCard.pictureID)
         card2imageView.setImageResource(R.drawable.card_back)
+        card1TextView.text = oldCard.cardName
+        card2TextView.text = "--"
 
     }
 

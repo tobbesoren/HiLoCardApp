@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.TextView
 
 /*
 Used for the play field.
@@ -26,6 +27,7 @@ class PlayFragment : Fragment() {
     private var param1: String? = null
     private var param2: String? = null
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         arguments?.let {
@@ -38,36 +40,29 @@ class PlayFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val gameActivity = activity as GameActivity
+
 
         val view = inflater.inflate(R.layout.fragment_play, container, false)
         val hiButton = view.findViewById<Button>(R.id.higherButton)
         val loButton = view.findViewById<Button>(R.id.lowerButton)
 
-
+        val gameActivity = activity as GameActivity
+        val mainDeckTextView = gameActivity.findViewById<TextView>(R.id.deckTextView)
 
         hiButton.setOnClickListener {
+            nextCard()
             with(gameActivity) {
-                card2TextView.text = playingDeck.drawCard().cardName
-                card2imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
-                checkCards(
-                    playingDeck.discardedCards[playingDeck.discardedCards.size - 1],
-                    playingDeck.discardedCards[playingDeck.discardedCards.size - 2]
-                )
-
+                mainDeckTextView.text = "Cards left: ${playingDeck.mainDeck.size}"
+                checkCards(newCard, oldCard)
                 replaceWithResultFragment()
             }
         }
 
         loButton.setOnClickListener {
+            nextCard()
             with(gameActivity) {
-                card2TextView.text = playingDeck.drawCard().cardName
-                card2imageView.setImageResource(playingDeck.discardedCards.last().pictureID)
-                checkCards(
-                    playingDeck.discardedCards[playingDeck.discardedCards.size - 2],
-                    playingDeck.discardedCards[playingDeck.discardedCards.size - 1]
-                )
-
+                mainDeckTextView.text = "Cards left: ${playingDeck.mainDeck.size}"
+                checkCards(oldCard, newCard)
                 replaceWithResultFragment()
             }
         }
@@ -92,5 +87,15 @@ class PlayFragment : Fragment() {
                     putString(ARG_PARAM2, param2)
                 }
             }
+    }
+
+
+    fun nextCard() {
+        val gameActivity = activity as GameActivity
+        with(gameActivity) {
+            newCard = playingDeck.drawCard()
+            card2TextView.text = newCard.cardName
+            card2imageView.setImageResource(newCard.pictureID)
+        }
     }
 }

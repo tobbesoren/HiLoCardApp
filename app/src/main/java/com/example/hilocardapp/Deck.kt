@@ -1,5 +1,7 @@
 package com.example.hilocardapp
 
+import android.util.Log
+
 /*
 A Deck can hold an unlimited number of cards in two mutable lists;
 mainDeck and discardedCards.
@@ -13,9 +15,9 @@ open class Deck {
     Moves discardedCards to mainDeck and shuffles the list.
      */
     fun shuffleDeck() {
-        addCardList(discardedCards, mainDeck)
-        discardedCards.clear()
+        moveCardList(discardedCards, mainDeck)
         mainDeck.shuffle()
+        Log.d("!!!!", "Deck shuffled")
     }
 
     /*
@@ -27,24 +29,25 @@ open class Deck {
             shuffleDeck()
         }
 
-        addCard(mainDeck[0], discardedCards)
-        mainDeck.removeAt(0)
+        moveCard(mainDeck[0], mainDeck, discardedCards)
+
         return discardedCards.last()
     }
 
     /*
-    Used to add a card to a mutableList of cards
+    Used to move a card from a mutableList of cards to another
      */
-    fun addCard(card: Card, cardListToAddTo: MutableList<Card>) {
+    fun moveCard(card: Card, cardListToAdd : MutableList<Card>, cardListToAddTo: MutableList<Card>) {
         cardListToAddTo.add(card)
+        cardListToAdd.removeAt(0)
     }
 
     /*
-    Used to add a mutableList of cards to another mutableList of cards
+    Used to move a mutableList of cards to another mutableList of cards
      */
-    fun addCardList(cardsToAdd: MutableList<Card>, cardListToAddTo: MutableList<Card>) {
-        for(card in cardsToAdd) {
-            addCard(card, cardListToAddTo)
+    fun moveCardList(cardsToAdd: MutableList<Card>, cardListToAddTo: MutableList<Card>) {
+        for(i in (0 until cardsToAdd.size)) {
+            moveCard(cardsToAdd[0], cardsToAdd, cardListToAddTo)
         }
     }
 
@@ -53,7 +56,7 @@ open class Deck {
     Not used for the moment; may be used to play with multiple decks.
      */
     fun addDeck(deck: Deck) {
-        addCardList(deck.mainDeck, mainDeck)
+        moveCardList(deck.mainDeck, mainDeck)
     }
 
     /*

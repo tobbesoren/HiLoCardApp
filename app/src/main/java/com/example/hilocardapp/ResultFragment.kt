@@ -44,6 +44,7 @@ class ResultFragment : Fragment() {
 
         continueButton.setOnClickListener {
             with(gameActivity) {
+                oldCard = newCard
                 moveCardImage()
                 message.text = "Make your guess"
                 val transaction = supportFragmentManager.beginTransaction()
