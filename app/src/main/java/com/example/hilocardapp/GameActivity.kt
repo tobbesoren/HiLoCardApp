@@ -108,7 +108,7 @@ class GameActivity : AppCompatActivity() {
         transaction.commit()
     }
 
-    fun addGameOverFragment() {
+    fun replaceWithGameOverFragment() {
         Log.d("!!!!", "game over")
         val transaction = supportFragmentManager.beginTransaction()
         transaction.replace(R.id.container, mainGameOverFragment, "gameOverFragment")
@@ -117,15 +117,10 @@ class GameActivity : AppCompatActivity() {
 
     fun returnToMainMenu() {
         val intent = Intent(this, MainActivity::class.java)
-        intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TOP
         startActivity(intent)
+        finish()
     }
 
-    fun delay() {
-        Timer("SettingUp", false).schedule(2500) {
-            moveCardImage()
-        }
-    }
 
     fun moveCardImage() {
         card1imageView.setImageResource(oldCard.pictureID)
@@ -137,6 +132,6 @@ class GameActivity : AppCompatActivity() {
 
     fun gameOver() {
         message.text = "Game Over"
-        addGameOverFragment()
+        replaceWithGameOverFragment()
     }
 }

@@ -1,5 +1,6 @@
 package com.example.hilocardapp
 
+import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -44,8 +45,9 @@ class GameOverFragment : Fragment() {
 
 
         hiScoresButton.setOnClickListener {
-            //TO DO
-
+            val intent = Intent(gameActivity, HiScoreActivity::class.java)
+            startActivity(intent)
+            gameActivity.finish()
         }
 
         menuButton.setOnClickListener {
