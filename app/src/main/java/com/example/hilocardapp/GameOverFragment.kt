@@ -1,7 +1,9 @@
 package com.example.hilocardapp
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -28,6 +30,7 @@ class GameOverFragment : Fragment() {
         arguments?.let {
             param1 = it.getString(ARG_PARAM1)
             param2 = it.getString(ARG_PARAM2)
+
         }
     }
 
@@ -43,6 +46,10 @@ class GameOverFragment : Fragment() {
 
         val gameActivity = activity as GameActivity
 
+        val sharedPreferences = gameActivity.getSharedPreferences("HiScores", Context.MODE_PRIVATE)
+        sharedPreferences.edit().putInt("Name", gameActivity.score).commit()
+        val item = sharedPreferences.getInt("Name", Context.MODE_PRIVATE)
+        Log.d("!!!!", "$item")
 
         hiScoresButton.setOnClickListener {
             val intent = Intent(gameActivity, HiScoreActivity::class.java)

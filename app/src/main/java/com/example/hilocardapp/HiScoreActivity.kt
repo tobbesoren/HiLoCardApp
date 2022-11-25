@@ -1,15 +1,20 @@
 package com.example.hilocardapp
 
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import java.io.File
+import java.util.prefs.Preferences
 
 class HiScoreActivity : AppCompatActivity() {
 
-    val hiScores = mutableListOf<HiScoreItem>()
+
 
 
 
@@ -18,7 +23,12 @@ class HiScoreActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_hi_score)
 
-        createTestData()
+        val sharedPreferences = getSharedPreferences("HiScores", Context.MODE_PRIVATE)
+        val hiScores = mutableListOf<HiScoreItem>()
+
+
+        createTestData(hiScores)
+        getHighScores(sharedPreferences, hiScores)
 
         val recyclerView = findViewById<RecyclerView>(R.id.hiScoreRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
@@ -35,10 +45,23 @@ class HiScoreActivity : AppCompatActivity() {
         }
     }
 
-    fun createTestData() {
-        for(i in 1..25) {
+    fun createTestData(hiScores: MutableList<HiScoreItem>) {
+        for(i in 1..5) {
             hiScores.add(HiScoreItem((1..35).shuffled()[0], "Tobbe"))
         }
-        hiScores.sortBy{it.score}
+
     }
+
+    fun getHighScores(sharedPreferences : SharedPreferences, hiScores: MutableList<HiScoreItem>) {
+        val hiScoreMap = sharedPreferences.all
+        for(item in hiScoreMap) {
+            Log.d("!!!!", "Hey")
+            val name = item.key
+            val score = item.value
+            Log.d("!!!!", "$name, $score")
+            hiScores.add(HiScoreItem(score as Int, name))
+        }
+    }
+
+
 }

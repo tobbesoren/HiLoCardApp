@@ -1,5 +1,6 @@
 package com.example.hilocardapp
 
+import android.content.Context
 import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
@@ -31,6 +32,7 @@ class GameActivity : AppCompatActivity() {
     var triesLeft = 1
 
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_game)
@@ -47,8 +49,8 @@ class GameActivity : AppCompatActivity() {
         card2imageView = findViewById(R.id.card2ImageView)
 
 
-//        val hiButton = findViewById<Button>(R.id.higherButton)
-//        val loButton = findViewById<Button>(R.id.lowerButton)
+
+
 
         //Initialize playingDeck
         playingDeck = StandardDeck()
