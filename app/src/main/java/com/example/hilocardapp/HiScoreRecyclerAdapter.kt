@@ -20,8 +20,9 @@ class HiScoreRecyclerAdapter(val context : Context, val hiScores : List<HiScoreI
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) {
         val hiScoreItem = hiScores[position]
-        holder.nameTextView.text = hiScoreItem.name
+
         holder.hiScoreTextView.text = hiScoreItem.score.toString()
+        holder.rankTextView.text = (position + 1).toString()
 
     }
 
@@ -30,8 +31,9 @@ class HiScoreRecyclerAdapter(val context : Context, val hiScores : List<HiScoreI
     }
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
-        val nameTextView = itemView.findViewById<TextView>(R.id.nameTextView)
+
         val hiScoreTextView = itemView.findViewById<TextView>(R.id.hiScoreTextView)
+        val rankTextView = itemView.findViewById<TextView>(R.id.rankTextView)
 
     }
 }

@@ -12,6 +12,10 @@ import kotlin.concurrent.schedule
 
 class GameActivity : AppCompatActivity() {
 
+    /*
+    Declaring
+     */
+
     lateinit var playingDeck: StandardDeck
 
     lateinit var card1TextView : TextView
@@ -29,7 +33,7 @@ class GameActivity : AppCompatActivity() {
     val mainGameOverFragment = GameOverFragment()
 
     var score = 0
-    var triesLeft = 1
+    var triesLeft = 5
 
 
 

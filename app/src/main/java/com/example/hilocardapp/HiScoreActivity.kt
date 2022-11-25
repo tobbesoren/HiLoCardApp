@@ -27,8 +27,9 @@ class HiScoreActivity : AppCompatActivity() {
         val hiScores = mutableListOf<HiScoreItem>()
 
 
-        createTestData(hiScores)
+        //createTestData(hiScores)
         getHighScores(sharedPreferences, hiScores)
+        hiScores.sortByDescending { it.score }
 
         val recyclerView = findViewById<RecyclerView>(R.id.hiScoreRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)

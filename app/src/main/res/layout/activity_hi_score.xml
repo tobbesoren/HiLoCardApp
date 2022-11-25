@@ -4,28 +4,45 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#2A9D8F"
     tools:context=".HiScoreActivity">
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/hiScoreRecyclerView"
-        android:layout_width="411dp"
-        android:layout_height="631dp"
+        android:layout_width="407dp"
+        android:layout_height="517dp"
         android:layout_marginStart="1dp"
         android:layout_marginEnd="1dp"
         android:layout_marginBottom="100dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.763"
         tools:listitem="@layout/list_item" />
 
     <Button
         android:id="@+id/menuButton2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:backgroundTint="#E76F51"
         android:text="menu"
+        android:textColor="#F4A261"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/hiScoreRecyclerView" />
+
+    <TextView
+        android:id="@+id/textView2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Best scores:"
+        android:textColor="#F4A261"
+        android:textSize="34sp"
+        app:layout_constraintBottom_toTopOf="@+id/hiScoreRecyclerView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
