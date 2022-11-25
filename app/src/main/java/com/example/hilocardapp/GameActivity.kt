@@ -13,13 +13,13 @@ import kotlin.concurrent.schedule
 class GameActivity : AppCompatActivity() {
 
     /*
-    Declaring
+    Declaring common variables
      */
 
     lateinit var playingDeck: StandardDeck
 
-    lateinit var card1TextView : TextView
-    lateinit var card2TextView : TextView
+    //lateinit var card1TextView : TextView
+    //lateinit var card2TextView : TextView
     lateinit var scoreTextView : TextView
     lateinit var triesLeftTextView : TextView
     lateinit var message : TextView
@@ -46,8 +46,8 @@ class GameActivity : AppCompatActivity() {
         triesLeftTextView = findViewById(R.id.triesLeftTextView)
         message = findViewById(R.id.messageTextView)
 
-        card1TextView = findViewById(R.id.card1TextView)
-        card2TextView = findViewById(R.id.card2TextView)
+        //card1TextView = findViewById(R.id.card1TextView)
+        //card2TextView = findViewById(R.id.card2TextView)
 
         card1imageView = findViewById(R.id.card1ImageView)
         card2imageView = findViewById(R.id.card2ImageView)
@@ -60,11 +60,7 @@ class GameActivity : AppCompatActivity() {
         playingDeck = StandardDeck()
         playingDeck.initDeck()
 
-
-
         startGame()
-
-
     }
 
     fun startGame() {
@@ -76,8 +72,8 @@ class GameActivity : AppCompatActivity() {
         scoreTextView.text = "Score: $score"
         triesLeftTextView.text = "Tries left: $triesLeft"
 
-        card1TextView.text = oldCard.cardName
-        card2TextView.text = "--"
+        //card1TextView.text = oldCard.cardName
+        //card2TextView.text = "--"
 
         message.text = "Make your guess"
 
@@ -131,8 +127,8 @@ class GameActivity : AppCompatActivity() {
     fun moveCardImage() {
         card1imageView.setImageResource(oldCard.pictureID)
         card2imageView.setImageResource(R.drawable.card_back)
-        card1TextView.text = oldCard.cardName
-        card2TextView.text = "--"
+        //card1TextView.text = oldCard.cardName
+        //card2TextView.text = "--"
 
     }
 

@@ -22,7 +22,7 @@ class HiScoreRecyclerAdapter(val context : Context, val hiScores : List<HiScoreI
         val hiScoreItem = hiScores[position]
 
         holder.hiScoreTextView.text = hiScoreItem.score.toString()
-        holder.rankTextView.text = (position + 1).toString()
+        holder.rankTextView.text = "No. " + (position + 1).toString() +":"
 
     }
 

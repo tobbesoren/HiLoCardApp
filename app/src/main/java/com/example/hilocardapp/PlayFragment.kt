@@ -48,13 +48,13 @@ class PlayFragment : Fragment() {
         val loButton = view.findViewById<Button>(R.id.lowerButton)
 
         val gameActivity = activity as GameActivity
-        val mainDeckTextView = gameActivity.findViewById<TextView>(R.id.deckTextView)
+
 
         hiButton.setOnClickListener {
             nextCard()
 
             with(gameActivity) {
-                mainDeckTextView.text = "Cards left: ${playingDeck.mainDeck.size}"
+
                 checkCards(newCard, oldCard)
                 if(gameActivity.triesLeft > 0) {
                     replaceWithResultFragment()
@@ -65,7 +65,7 @@ class PlayFragment : Fragment() {
         loButton.setOnClickListener {
             nextCard()
             with(gameActivity) {
-                mainDeckTextView.text = "Cards left: ${playingDeck.mainDeck.size}"
+
                 checkCards(oldCard, newCard)
                 if(gameActivity.triesLeft > 0) {
                     replaceWithResultFragment()
@@ -100,7 +100,7 @@ class PlayFragment : Fragment() {
         val gameActivity = activity as GameActivity
         with(gameActivity) {
             newCard = playingDeck.drawCard()
-            card2TextView.text = newCard.cardName
+
             card2imageView.setImageResource(newCard.pictureID)
         }
     }
