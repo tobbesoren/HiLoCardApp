@@ -1,12 +1,11 @@
 package com.example.hilocardapp
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 
 /*
 Used for the play field.
@@ -51,7 +50,7 @@ class PlayFragment : Fragment() {
 
 
         hiButton.setOnClickListener {
-            nextCard()
+            drawNextCard()
 
             with(gameActivity) {
 
@@ -63,7 +62,7 @@ class PlayFragment : Fragment() {
         }
 
         loButton.setOnClickListener {
-            nextCard()
+            drawNextCard()
             with(gameActivity) {
 
                 checkCards(oldCard, newCard)
@@ -96,11 +95,10 @@ class PlayFragment : Fragment() {
     }
 
 
-    fun nextCard() {
+    private fun drawNextCard() {
         val gameActivity = activity as GameActivity
         with(gameActivity) {
             newCard = playingDeck.drawCard()
-
             card2imageView.setImageResource(newCard.pictureID)
         }
     }

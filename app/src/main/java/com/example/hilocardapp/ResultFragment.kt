@@ -46,7 +46,7 @@ class ResultFragment : Fragment() {
             with(gameActivity) {
                 oldCard = newCard
                 moveCardImage()
-                message.text = "Make your guess"
+                message.text = getString(R.string.make_guess)
                 val transaction = supportFragmentManager.beginTransaction()
                 transaction.replace(R.id.container, mainPlayFragment, "playFragment")
                 transaction.commit()

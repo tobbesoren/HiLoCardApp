@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 
-class HiScoreRecyclerAdapter(val context : Context, val hiScores : List<HiScoreItem>) : RecyclerView.Adapter<HiScoreRecyclerAdapter.ViewHolder>(){
+class HiScoreRecyclerAdapter(val context : Context, private val hiScores : List<HiScoreItem>) : RecyclerView.Adapter<HiScoreRecyclerAdapter.ViewHolder>(){
 
-    var layoutInflater = LayoutInflater.from(context)
+    private var layoutInflater = LayoutInflater.from(context)
 
 
 
@@ -22,7 +22,7 @@ class HiScoreRecyclerAdapter(val context : Context, val hiScores : List<HiScoreI
         val hiScoreItem = hiScores[position]
 
         holder.hiScoreTextView.text = hiScoreItem.score.toString()
-        holder.rankTextView.text = "No. " + (position + 1).toString() +":"
+        holder.rankTextView.text = context.getString(R.string.number, (position + 1).toString())
 
     }
 
@@ -32,8 +32,8 @@ class HiScoreRecyclerAdapter(val context : Context, val hiScores : List<HiScoreI
 
     inner class ViewHolder(itemView : View) : RecyclerView.ViewHolder(itemView) {
 
-        val hiScoreTextView = itemView.findViewById<TextView>(R.id.hiScoreTextView)
-        val rankTextView = itemView.findViewById<TextView>(R.id.rankTextView)
+        val hiScoreTextView = itemView.findViewById<TextView>(R.id.hiScoreTextView)!!
+        val rankTextView = itemView.findViewById<TextView>(R.id.rankTextView)!!
 
     }
 }

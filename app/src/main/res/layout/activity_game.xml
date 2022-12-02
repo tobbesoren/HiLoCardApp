@@ -24,7 +24,7 @@
         android:id="@+id/triesLeftTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="tries left"
+        android:text="@string/tries_left"
         android:textColor="@color/teaGreen"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -32,13 +32,14 @@
         app:layout_constraintHorizontal_bias="0.435"
         app:layout_constraintStart_toStartOf="@+id/card2ImageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.122"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/scoreTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="score"
+        android:text="@string/score_text_view"
         android:textColor="@color/teaGreen"
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -46,7 +47,8 @@
         app:layout_constraintHorizontal_bias="0.494"
         app:layout_constraintStart_toStartOf="@+id/card1ImageView"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.122"
+        tools:ignore="TextContrastCheck" />
 
     <ImageView
         android:id="@+id/card2ImageView"

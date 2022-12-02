@@ -1,14 +1,11 @@
 package com.example.hilocardapp
 
-import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.ImageView
 import android.widget.TextView
-import java.util.*
-import kotlin.concurrent.schedule
+import androidx.appcompat.app.AppCompatActivity
 
 class GameActivity : AppCompatActivity() {
 
@@ -21,9 +18,9 @@ class GameActivity : AppCompatActivity() {
 
     //...then, the Activity's Views...
     private lateinit var scoreTextView : TextView
-    lateinit var triesLeftTextView : TextView
+    private lateinit var triesLeftTextView : TextView
     lateinit var message : TextView
-    lateinit var card1imageView : ImageView
+    private lateinit var card1imageView : ImageView
     lateinit var card2imageView : ImageView
     lateinit var oldCard : Card
     lateinit var newCard : Card
@@ -38,6 +35,8 @@ class GameActivity : AppCompatActivity() {
     //...and the score; and triesLeft.
     var score = 0
     var triesLeft = 5
+
+
 
 
 
@@ -61,7 +60,7 @@ class GameActivity : AppCompatActivity() {
     }
 
     /*
-    Sets up the initial playfield.
+    Sets up the initial play field.
      */
     private fun startGame() {
         replaceWithPlayFragment()
@@ -69,10 +68,10 @@ class GameActivity : AppCompatActivity() {
 
         oldCard = playingDeck.drawCard()
 
-        scoreTextView.text = "Score: $score"
-        triesLeftTextView.text = "Tries left: $triesLeft"
+        scoreTextView.text = getString(R.string.current_score, score)
+        triesLeftTextView.text = getString(R.string.tries_left, triesLeft)
 
-        message.text = "Make your guess"
+        message.text = getString(R.string.make_guess)
 
         card1imageView.setImageResource(playingDeck.discardedCards[0].pictureID)
         card2imageView.setImageResource(R.drawable.card_back)
@@ -86,14 +85,14 @@ class GameActivity : AppCompatActivity() {
      */
     fun checkCards(hiCard: Card, loCard: Card)  {
         if (hiCard.valueInt > loCard.valueInt) {
-            message.text = "Correct!"
+            message.text = getString(R.string.correct)
             score++
         } else {
-            message.text = "Wrong!"
+            message.text = getString(R.string.wrong)
             triesLeft--
         }
-        scoreTextView.text = "Score: $score"
-        triesLeftTextView.text = "Tries left: $triesLeft"
+        scoreTextView.text = getString(R.string.current_score, score)
+        triesLeftTextView.text = getString(R.string.tries_left, triesLeft)
         if(triesLeft == 0) {
             gameOver()
         }
@@ -152,7 +151,7 @@ class GameActivity : AppCompatActivity() {
     Runs when there are no tries left.
      */
     private fun gameOver() {
-        message.text = "Game Over"
+        message.text = getString(R.string.game_over)
         replaceWithGameOverFragment()
     }
 }

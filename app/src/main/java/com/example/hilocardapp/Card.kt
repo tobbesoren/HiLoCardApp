@@ -1,8 +1,8 @@
 package com.example.hilocardapp
 
-import android.graphics.drawable.Drawable
 import android.util.Log
 import java.util.*
+
 /*
 A class for playing cards. Holds the cards suite and valueName as Enums.
 Also holds a pictureID and a numerical value(for comparison).

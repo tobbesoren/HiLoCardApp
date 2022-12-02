@@ -27,18 +27,19 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:backgroundTint="@color/metallicBlue"
-        android:text="menu"
+        android:text="@string/menu"
         android:textColor="@color/teaGreen"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/hiScoreRecyclerView" />
+        app:layout_constraintTop_toBottomOf="@+id/hiScoreRecyclerView"
+        tools:ignore="TextContrastCheck" />
 
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Best scores:"
+        android:text="@string/best_scores"
         android:textColor="@color/metallicBlue"
         android:textSize="34sp"
         app:layout_constraintBottom_toTopOf="@+id/hiScoreRecyclerView"

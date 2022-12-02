@@ -6,16 +6,17 @@ import android.widget.Button
 import android.widget.TextView
 
 /*
-Used to test draw() and shuffle() functionality during development
+Used to test draw() and shuffle() functionality during development.
+Currently not in use, but I leave it if I want to further develop the app.
  */
 class TestActivity : AppCompatActivity() {
-    lateinit var drawButton : Button
-    lateinit var  shuffleButton : Button
-    lateinit var playingDeck: Deck
+    private lateinit var drawButton : Button
+    private lateinit var  shuffleButton : Button
+    private lateinit var playingDeck: Deck
 
-    lateinit var currentCard: TextView
-    lateinit var mainDeck: TextView
-    lateinit var discardedCards: TextView
+    private lateinit var currentCard: TextView
+    private lateinit var mainDeck: TextView
+    private lateinit var discardedCards: TextView
 
 
     override fun onCreate(savedInstanceState: Bundle?) {

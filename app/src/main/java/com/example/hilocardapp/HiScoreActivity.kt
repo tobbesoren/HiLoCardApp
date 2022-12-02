@@ -5,19 +5,15 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.widget.Button
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import java.io.File
-import java.util.prefs.Preferences
 
+/*
+This activity shows the hi-scores. Uses sharedPreferences to read saved scores.
+Uses HiScoreRecyclerAdapter to handle the RecyclerView.
+ */
 class HiScoreActivity : AppCompatActivity() {
-
-
-
-
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,19 +22,21 @@ class HiScoreActivity : AppCompatActivity() {
         val sharedPreferences = getSharedPreferences("HiScores", Context.MODE_PRIVATE)
         val hiScores = mutableListOf<HiScoreItem>()
 
-
-        //createTestData(hiScores)
+        //Reads the hi-scores...
         getHighScores(sharedPreferences, hiScores)
+        //...and sorts them.
         hiScores.sortByDescending { it.score }
 
         val recyclerView = findViewById<RecyclerView>(R.id.hiScoreRecyclerView)
         recyclerView.layoutManager = LinearLayoutManager(this)
 
+        //Lets the Adapter handle the scores.
         val adapter = HiScoreRecyclerAdapter(this, hiScores)
         recyclerView.adapter = adapter
 
         val menuButton = findViewById<Button>(R.id.menuButton2)
 
+        //Get back to menu.
         menuButton.setOnClickListener {
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
@@ -46,23 +44,20 @@ class HiScoreActivity : AppCompatActivity() {
         }
     }
 
-    fun createTestData(hiScores: MutableList<HiScoreItem>) {
-        for(i in 1..5) {
-            hiScores.add(HiScoreItem((1..35).shuffled()[0], "Tobbe"))
-        }
-
-    }
-
-    fun getHighScores(sharedPreferences : SharedPreferences, hiScores: MutableList<HiScoreItem>) {
+    /*
+    Reads the sharedPreferences items to a mutable list.
+     */
+    private fun getHighScores(sharedPreferences : SharedPreferences, hiScores: MutableList<HiScoreItem>) {
         val hiScoreMap = sharedPreferences.all
         for(item in hiScoreMap) {
-            Log.d("!!!!", "Hey")
-            val name = item.key
+
             val score = item.value
-            Log.d("!!!!", "$name, $score")
-            hiScores.add(HiScoreItem(score as Int, name))
+            hiScores.add(HiScoreItem(score as Int))
         }
     }
 
-
 }
+
+
+
+
