@@ -11,7 +11,7 @@ Used to test draw() and shuffle() functionality during development
 class TestActivity : AppCompatActivity() {
     lateinit var drawButton : Button
     lateinit var  shuffleButton : Button
-    lateinit var playingDeck: StandardDeck
+    lateinit var playingDeck: Deck
 
     lateinit var currentCard: TextView
     lateinit var mainDeck: TextView
@@ -29,7 +29,7 @@ class TestActivity : AppCompatActivity() {
         mainDeck = findViewById(R.id.mainDeckTextView)
         discardedCards = findViewById(R.id.discardedCardsTextView)
 
-        playingDeck = StandardDeck()
+        playingDeck = Deck()
         playingDeck.initDeck()
         playingDeck.shuffleDeck()
 

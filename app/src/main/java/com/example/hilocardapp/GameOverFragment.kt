@@ -1,15 +1,13 @@
 package com.example.hilocardapp
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import androidx.fragment.app.Fragment
 
 // TODO: Rename parameter arguments, choose names that match
 // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -20,6 +18,11 @@ private const val ARG_PARAM2 = "param2"
  * A simple [Fragment] subclass.
  * Use the [GameOverFragment.newInstance] factory method to
  * create an instance of this fragment.
+ */
+
+/*
+The GameOverFragment is used to hold the HI-SCORES and MENU buttons.
+It also adds the player's score to the hi-score list in sharedPreferences.
  */
 class GameOverFragment : Fragment() {
     // TODO: Rename and change types of parameters
@@ -47,8 +50,8 @@ class GameOverFragment : Fragment() {
 
         val gameActivity = activity as GameActivity
 
+        // Saves the score to hi-scores in sharedPreferences.
         addHiScore(gameActivity)
-
 
 
         hiScoresButton.setOnClickListener {
@@ -58,9 +61,7 @@ class GameOverFragment : Fragment() {
         }
 
         menuButton.setOnClickListener {
-            with(gameActivity) {
-                returnToMainMenu()
-            }
+            gameActivity.returnToMainMenu()
         }
         return view
     }
@@ -85,12 +86,13 @@ class GameOverFragment : Fragment() {
             }
     }
 
-    fun addHiScore(gameActivity: GameActivity) {
-        val sharedPreferences = gameActivity.getSharedPreferences("HiScores", Context.MODE_PRIVATE)
-
+    /*
+    Adds the players final score to HiScores in sharedPreferences.
+     */
+    private fun addHiScore(gameActivity: GameActivity) {
+        val sharedPreferences = gameActivity.getSharedPreferences(
+            "HiScores", Context.MODE_PRIVATE)
         val nextKey = (sharedPreferences.all.size + 1).toString()
-        sharedPreferences.edit().putInt("$nextKey", gameActivity.score).commit()
-        val item = sharedPreferences.getInt("Name", Context.MODE_PRIVATE)
-        Log.d("!!!!", "$item")
+        sharedPreferences.edit().putInt(nextKey, gameActivity.score).apply()
     }
 }
